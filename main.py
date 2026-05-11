@@ -39,7 +39,7 @@ class AgentResponse(BaseModel):
 llm = ChatGroq(model="openai/gpt-oss-20b")
 structured_llm = llm.with_structured_output(AgentResponse)
 # tools = [search]
-tools = [TavilySearch()]
+tools = [TavilySearch(max_results=3)]
 prompt = ChatPromptTemplate.from_messages([("human", "{input}"),MessagesPlaceholder(variable_name="agent_scratchpad")])
 agent = create_tool_calling_agent(llm=llm,tools=tools,prompt=prompt)
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
@@ -48,7 +48,7 @@ def main():
     result = agent_executor.invoke({"input": HumanMessage(content="What's the weather in Tokyo?")})
     print(result)
     final_output = structured_llm.invoke(
-        f"Based on this research: {result['output']}, format the answer and list the URLs."
+        f"Based on this research: {result}, format the answer and list the URLs."
     )
     print("\n--- Structured Result ---")
     print(f"Answer: {final_output.answer}")
