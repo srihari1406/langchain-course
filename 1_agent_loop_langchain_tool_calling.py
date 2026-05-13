@@ -9,6 +9,7 @@ from langsmith import traceable
 
 MAX_ITERATIONS = 10
 MODEL = "qwen3:1.7b"
+GROQ_MODEL = "openai/gpt-oss-120b"
 
 # -------- Tools (LangChain @tools decorator) --------
 
@@ -36,7 +37,8 @@ def run_agent(question: str):
     tools = [get_product_price, apply_discount] #Creatikng List of Tools
     tools_dict = {t.name: t for t in tools}
 
-    llm = init_chat_model(f"ollama:{MODEL}", temperature = 0)
+    # llm = init_chat_model(f"ollama:{MODEL}", temperature = 0)
+    llm = init_chat_model(f"groq:{GROQ_MODEL}", temperature = 0)
     llm_with_tools = llm.bind_tools(tools)
 
     print(f"Question: {question}")
