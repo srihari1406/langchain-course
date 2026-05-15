@@ -12,6 +12,7 @@ dependencies = [
     "langchain-community>=0.3.31",
     "langchain-groq>=0.3.8",
     "langchain-ollama>=0.3.10",
+    "langchain-openai>=0.3.35",
     "langchain-pinecone>=0.2.12",
     "langchainhub>=0.1.21",
     "python-dotenv>=1.2.1",
