@@ -24,3 +24,4 @@ if __name__ == "__main__":
     print("Creating vector store...")
     PineconeVectorStore.from_documents(split_docs, embeddings, index_name=os.getenv("INDEX_NAME"))
     print("Done!")
+    
